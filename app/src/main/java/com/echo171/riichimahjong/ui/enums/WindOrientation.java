@@ -1,16 +1,13 @@
-package com.echo171.riichimahjong.mahjong;
+package com.echo171.riichimahjong.ui.enums;
 
-/**
- * Created by echo on 19/06/2017.
- */
-public enum Side {
+public enum WindOrientation {
     EAST(0),
     SOUTH(1),
     WEST(2),
     NORTH(3);
 
     private final int value;
-    Side(int value) {
+    WindOrientation(int value) {
         this.value = value;
     }
 

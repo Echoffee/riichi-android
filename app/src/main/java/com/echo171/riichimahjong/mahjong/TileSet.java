@@ -1,5 +1,8 @@
 package com.echo171.riichimahjong.mahjong;
 
+import com.echo171.riichimahjong.mahjong.enums.Disposition;
+import com.echo171.riichimahjong.mahjong.enums.Family;
+
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;

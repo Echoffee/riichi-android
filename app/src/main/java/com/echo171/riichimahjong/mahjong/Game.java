@@ -1,5 +1,9 @@
 package com.echo171.riichimahjong.mahjong;
 
+import com.echo171.riichimahjong.mahjong.enums.Disposition;
+import com.echo171.riichimahjong.mahjong.enums.PlayerType;
+import com.echo171.riichimahjong.mahjong.enums.Wind;
+
 import java.util.LinkedList;
 
 /**
@@ -9,14 +13,14 @@ public class Game {
     private LinkedList<Player> players;
     private TileSet wall;
     private TileSet deadWall;
-    private Side currentWind;
+    private Wind currentWind;
     private int round;
     private int bonus;
     private int hostId = 0;
-    private Side currentPlayerTurn;
+    private Wind currentPlayerTurn;
 
 
-    public Side getCurrentWind() {
+    public Wind getCurrentWind() {
         return currentWind;
     }
 
@@ -28,7 +32,7 @@ public class Game {
         return bonus;
     }
 
-    public Side getCurrentPlayerTurn() {
+    public Wind getCurrentPlayerTurn() {
         return currentPlayerTurn;
     }
 
@@ -44,7 +48,7 @@ public class Game {
         //TODO : Don't fix PlayerType here
         //Init players
         for (int i = 0; i < rules.playersCount; i++)
-            players.add(new Player(Side.values()[i], (i == 0 ? PlayerType.HUMAN_SELF : PlayerType.CPU_AUTO)));
+            players.add(new Player(Wind.values()[i], (i == 0 ? PlayerType.HUMAN_SELF : PlayerType.CPU_AUTO)));
 
         //Generate whole tileset
         if (!wall.createFullTileset())
@@ -95,7 +99,7 @@ public class Game {
 		players.get(0).getHand().pickTile();
 		players.get(0).getHand().pickTile();*/
         //UiController.setLocalPlayerId(0);
-        currentPlayerTurn = Side.EAST;
+        currentPlayerTurn = Wind.EAST;
 
         //ON EACH DEVICE
         //UiManager m = new UiManager(this);
@@ -104,7 +108,7 @@ public class Game {
         return true;
     }
 
-    public Player getPlayer(Side playerSide) {
+    public Player getPlayer(Wind playerSide) {
         return players.get(playerSide.getValue());
     }
 
@@ -119,16 +123,16 @@ public class Game {
     public void nextPlayerTurn() {
         switch (currentPlayerTurn) {
             case EAST:
-                currentPlayerTurn = Side.SOUTH;
+                currentPlayerTurn = Wind.SOUTH;
                 break;
             case SOUTH:
-                currentPlayerTurn = Side.WEST;
+                currentPlayerTurn = Wind.WEST;
                 break;
             case WEST:
-                currentPlayerTurn = Side.NORTH;
+                currentPlayerTurn = Wind.NORTH;
                 break;
             case NORTH:
-                currentPlayerTurn = Side.EAST;
+                currentPlayerTurn = Wind.EAST;
                 break;
         }
         Player p = getPlayer(currentPlayerTurn);

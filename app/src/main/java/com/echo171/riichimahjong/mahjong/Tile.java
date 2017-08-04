@@ -1,5 +1,7 @@
 package com.echo171.riichimahjong.mahjong;
 
+import com.echo171.riichimahjong.mahjong.enums.Family;
+
 /**
  * Created by echo on 19/06/2017.
  */
@@ -15,7 +17,7 @@ public class Tile{//} extends IMovableObject{
     private Family family;
     private int doraValue;
     private boolean revealed;
-    private TileOrientation orientation;
+    //private TileOrientation orientation;
     //private Bitmap tileBitmap;
     private boolean picked;
 
@@ -25,7 +27,7 @@ public class Tile{//} extends IMovableObject{
         this.value = value;
         doraValue = 0;
         revealed = false;
-        orientation = TileOrientation.NONE;
+        //orientation = TileOrientation.NONE;
     }
 
 
@@ -130,14 +132,14 @@ public class Tile{//} extends IMovableObject{
         return value;
     }
 
-    public TileOrientation getOrientation() {
+    /*public TileOrientation getOrientation() {
         return orientation;
     }
 
     public void setOrientation(TileOrientation orientation) {
         this.orientation = orientation;
     }
-
+*/
     public void setPicked(boolean picked) {
         this.picked = picked;
     }

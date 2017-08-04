@@ -1,5 +1,9 @@
 package com.echo171.riichimahjong.mahjong;
 
+import com.echo171.riichimahjong.mahjong.enums.Disposition;
+import com.echo171.riichimahjong.mahjong.enums.PlayerType;
+import com.echo171.riichimahjong.mahjong.enums.Wind;
+
 import java.util.LinkedList;
 
 /**
@@ -11,12 +15,12 @@ public class Player {
     private TileSet hand;
     private LinkedList<TileSet> melds;
     private TileSet river;
-    private Side wind;
+    private Wind wind;
     private boolean isRiichi;
     private int selectedTile;
     private PlayerType playerType;
 
-    public Player(Side wind, PlayerType playerType)
+    public Player(Wind wind, PlayerType playerType)
     {
         this.wind = wind;
         this.playerType = playerType;
@@ -51,7 +55,7 @@ public class Player {
         return river;
     }
 
-    public Side getWind() {
+    public Wind getWind() {
         return wind;
     }
 

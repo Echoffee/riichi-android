@@ -1,4 +1,4 @@
-package com.echo171.riichimahjong.mahjong;
+package com.echo171.riichimahjong.mahjong.enums;
 
 /**
  * Created by echo on 19/06/2017.
