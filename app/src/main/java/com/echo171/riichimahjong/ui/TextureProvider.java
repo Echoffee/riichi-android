@@ -114,7 +114,17 @@ public class TextureProvider {
     }
 
     public static Bitmap getGenericTileTexture(TileOrientation orientation) {
-        //TODO
+        switch (orientation) {
+            case R_SELF:
+                return tileRSelf;
+            case V_RIGHT:
+                return tileVRight;
+            case V_FRONT:
+                return tileVFront;
+            case V_LEFT:
+                return tileVLeft;
+        }
+
         return null;
     }
 }

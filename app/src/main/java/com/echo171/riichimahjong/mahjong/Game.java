@@ -45,10 +45,9 @@ public class Game {
 
     public boolean initialize(Ruleset rules)
     {
-        //TODO : Don't fix PlayerType here
         //Init players
         for (int i = 0; i < rules.playersCount; i++)
-            players.add(new Player(Wind.values()[i], (i == 0 ? PlayerType.HUMAN_SELF : PlayerType.CPU_AUTO)));
+            players.add(new Player(Wind.values()[i], rules.players[i]));
 
         //Generate whole tileset
         if (!wall.createFullTileset())
