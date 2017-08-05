@@ -1,6 +1,7 @@
 package com.echo171.riichimahjong.mahjong;
 
 import com.echo171.riichimahjong.mahjong.enums.Family;
+import com.echo171.riichimahjong.mahjong.enums.Position;
 
 /**
  * Created by echo on 19/06/2017.
@@ -17,6 +18,7 @@ public class Tile{//} extends IMovableObject{
     private Family family;
     private int doraValue;
     private boolean revealed;
+    private Position position;
     //private TileOrientation orientation;
     //private Bitmap tileBitmap;
     private boolean picked;
@@ -142,5 +144,13 @@ public class Tile{//} extends IMovableObject{
 */
     public void setPicked(boolean picked) {
         this.picked = picked;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
     }
 }

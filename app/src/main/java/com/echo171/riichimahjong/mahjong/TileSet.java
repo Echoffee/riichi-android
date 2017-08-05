@@ -2,6 +2,7 @@ package com.echo171.riichimahjong.mahjong;
 
 import com.echo171.riichimahjong.mahjong.enums.Disposition;
 import com.echo171.riichimahjong.mahjong.enums.Family;
+import com.echo171.riichimahjong.mahjong.enums.Position;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -45,22 +46,28 @@ public class TileSet {
                 case MAN:
                 case SOU:
                 case PIN:
-                    for (int i = 1; i < 10; i++)
-                    {
+                    for (int i = 1; i < 10; i++) {
                         Tile t = new Tile(f, i);
                         if (i == 5)
                             t.setDoraValue(1);
 
+                        t.setPosition(Position.WALL);
                         set.add(t);
-                        for (int j = 0; j < 3; j++)
-                            set.add(new Tile(f, i));
+                        for (int j = 0; j < 3; j++){
+                            Tile tt = new Tile(f, i);
+                            tt.setPosition(Position.WALL);
+                            set.add(tt);
+                        }
                     }
                     break;
                 case WIND:
                 case DRAGON:
                     for (int i = 1; i < 5; i++)
-                        for (int j = 0; j < 4; j++)
-                            set.add(new Tile(f, i));
+                        for (int j = 0; j < 4; j++){
+                            Tile t = new Tile(f, i);
+                            t.setPosition(Position.WALL);
+                            set.add(t);
+                        }
                     break;
             }
         }
@@ -81,8 +88,9 @@ public class TileSet {
         return tiles.removeLast();
     }
 
-    public void addTile(Tile t)
+    public void addTile(Tile t, Position newPosition)
     {
+        t.setPosition(newPosition);
         tiles.addLast(t);
     }
 

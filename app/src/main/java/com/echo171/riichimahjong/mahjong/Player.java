@@ -2,6 +2,7 @@ package com.echo171.riichimahjong.mahjong;
 
 import com.echo171.riichimahjong.mahjong.enums.Disposition;
 import com.echo171.riichimahjong.mahjong.enums.PlayerType;
+import com.echo171.riichimahjong.mahjong.enums.Position;
 import com.echo171.riichimahjong.mahjong.enums.Wind;
 
 import java.util.LinkedList;
@@ -19,7 +20,7 @@ public class Player {
     private boolean isRiichi;
     private int selectedTile;
     private PlayerType playerType;
-
+    //TODO : CallPon,Chii, etc... actions with true tiles
     public Player(Wind wind, PlayerType playerType)
     {
         this.wind = wind;
@@ -30,9 +31,25 @@ public class Player {
         river = new TileSet(Disposition.RIVER);
         isRiichi = false;
     }
-    public void addTileToHand(Tile tile)
-    {
-        hand.addTile(tile);
+
+    public void addTileToHand(Tile tile) {
+        Position p = null;
+        switch (wind) {
+            case EAST:
+                p = Position.HAND_EAST;
+                break;
+            case SOUTH:
+                p = Position.HAND_SOUTH;
+                break;
+            case WEST:
+                p = Position.HAND_WEST;
+                break;
+            case NORTH:
+                p = Position.HAND_NORTH;
+                break;
+        }
+
+        hand.addTile(tile, p);
     }
 
     public int getScore() {

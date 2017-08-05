@@ -2,6 +2,7 @@ package com.echo171.riichimahjong.mahjong;
 
 import com.echo171.riichimahjong.mahjong.enums.Disposition;
 import com.echo171.riichimahjong.mahjong.enums.PlayerType;
+import com.echo171.riichimahjong.mahjong.enums.Position;
 import com.echo171.riichimahjong.mahjong.enums.Wind;
 
 import java.util.LinkedList;
@@ -74,7 +75,7 @@ public class Game {
         //Reveal dora	  KDDDDD   3579
         //				KKKUUUUU   124680
         for (int i = 0; i < 14; i++) {
-            deadWall.addTile(wall.pickTile());
+            deadWall.addTile(wall.pickTile(), Position.DEAD_WALL);
         }
 
         deadWall.revealTile(5);
@@ -134,8 +135,9 @@ public class Game {
                 currentPlayerTurn = Wind.EAST;
                 break;
         }
+
         Player p = getPlayer(currentPlayerTurn);
-        p.getHand().addTile(wall.pickTile());
+        p.addTileToHand(wall.pickTile());
         p.setSelectedTile(p.getHand().getTiles().size() - 1);
         //if (p.getPlayerType() == PlayerType.CPU_AUTO) {
         //DiscardTile.CPUExecute(this, currentPlayerTurn);
