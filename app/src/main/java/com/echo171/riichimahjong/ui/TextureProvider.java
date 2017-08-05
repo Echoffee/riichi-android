@@ -3,8 +3,11 @@ package com.echo171.riichimahjong.ui;
 import android.content.res.Resources;
 import android.graphics.*;
 import com.echo171.riichimahjong.R;
+import com.echo171.riichimahjong.ui.enums.TileFamily;
 import com.echo171.riichimahjong.ui.enums.TileOrientation;
 import com.echo171.riichimahjong.ui.enums.WindOrientation;
+
+import java.util.HashMap;
 
 public class TextureProvider {
     private static  Bitmap tileVSelf;
@@ -19,6 +22,7 @@ public class TextureProvider {
     private static Resources resources;
     private static Paint paint;
     private static float m;
+    private static HashMap<TileQuery, Bitmap> bitmapPool;
 
     public static void initialize(Resources res)
     {
@@ -34,7 +38,78 @@ public class TextureProvider {
         tileHLeft = tileHRight; //BitmapFactory.decodeResource(resources, R.drawable.fronts);
         paint = new Paint();
         m = 0.8f;
+        bitmapPool = new HashMap<>();
     }
+
+    public static Bitmap getTileTexture(TileQuery query){
+        Bitmap result = bitmapPool.get(query);
+        if (result == null){
+            result = createBitmap(getTextureId(query), query.getOrientation());
+            bitmapPool.put(query, result);
+        }
+
+        return result;
+    }
+
+    private static int getTextureId(TileQuery query)
+    {
+        TileFamily family = query.getFamily();
+        int value = query.getValue();
+        boolean red = query.isRed();
+        switch (family){
+            default: return 0;
+            case MAN:
+                switch (value){
+                    default : case  1: return R.drawable.man1;
+                    case 2 : return R.drawable.man2;
+                    case 3 : return R.drawable.man3;
+                    case 4 : return R.drawable.man4;
+                    case 5 : return (red?R.drawable.man5d : R.drawable.man5);
+                    case 6 : return R.drawable.man6;
+                    case 7 : return R.drawable.man7;
+                    case 8 : return R.drawable.man8;
+                    case 9 : return R.drawable.man9;
+                }
+            case SOU:
+                switch (value){
+                    default : case  1: return R.drawable.sou1;
+                    case 2 : return R.drawable.sou2;
+                    case 3 : return R.drawable.sou3;
+                    case 4 : return R.drawable.sou4;
+                    case 5 : return (red?R.drawable.sou5d : R.drawable.sou5);
+                    case 6 : return R.drawable.sou6;
+                    case 7 : return R.drawable.sou7;
+                    case 8 : return R.drawable.sou8;
+                    case 9 : return R.drawable.sou9;
+                }
+            case PIN:
+                switch (value){
+                    default : case  1: return R.drawable.pin1;
+                    case 2 : return R.drawable.pin2;
+                    case 3 : return R.drawable.pin3;
+                    case 4 : return R.drawable.pin4;
+                    case 5 : return (red?R.drawable.pin5d : R.drawable.pin5);
+                    case 6 : return R.drawable.pin6;
+                    case 7 : return R.drawable.pin7;
+                    case 8 : return R.drawable.pin8;
+                    case 9 : return R.drawable.pin9;
+                }
+            case WIND:
+                switch (value){
+                    default : case  1: return R.drawable.wind1;
+                    case 2 : return R.drawable.wind2;
+                    case 3 : return R.drawable.wind3;
+                    case 4 : return R.drawable.wind4;
+                }
+            case DRAGON:
+                switch (value){
+                    default : case  1: return R.drawable.dragon1;
+                    case 2 : return R.drawable.dragon2;
+                    case 3 : return R.drawable.dragon3;
+                }
+        }
+    }
+
 
     public static Bitmap createBitmap(int textureId, TileOrientation orientation)
     {

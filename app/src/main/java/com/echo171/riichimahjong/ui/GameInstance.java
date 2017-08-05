@@ -9,23 +9,23 @@ import com.echo171.riichimahjong.ui.gameobjects.TileObject;
 import java.util.LinkedList;
 
 public class GameInstance {
-    private Game game;
-    private LinkedList<PlayerObject> playerObjects;
-    private PlayerObject localPlayer;
+    private static Game game;
+    private static LinkedList<PlayerObject> playerObjects;
+    private static PlayerObject localPlayer;
 
-    public Game getGame() {
+    public static Game getGame() {
         return game;
     }
 
-    public void setGame(Game game) {
-        this.game = game;
+    public static void setGame(Game game) {
+        GameInstance.game = game;
     }
 
-    public LinkedList<PlayerObject> getPlayers() {
+    public static LinkedList<PlayerObject> getPlayers() {
         return playerObjects;
     }
 
-    public PlayerObject getPlayer(PlayerPosition side){
+    public static PlayerObject getPlayer(PlayerPosition side){
         for(PlayerObject po : playerObjects)
             if (po.getPosition() == side)
                 return po;
@@ -33,11 +33,11 @@ public class GameInstance {
         return null;
     }
 
-    public PlayerObject getLocalPlayer() {
+    public static PlayerObject getLocalPlayer() {
         return localPlayer;
     }
 
-    public int getPositionDelta(PlayerPosition s) {
+    public static int getPositionDelta(PlayerPosition s) {
         int localPosition = s.getValue() - localPlayer.getWind().getValue();
         if (localPosition < 0)
             localPosition = 4 - s.getValue();
@@ -45,7 +45,7 @@ public class GameInstance {
         return localPosition;
     }
 
-    public WindOrientation getCurrentPlayerTurn() {
+    public static WindOrientation getCurrentPlayerTurn() {
         switch (game.getCurrentPlayerTurn()) {
             case EAST:
                 return WindOrientation.EAST;
@@ -60,8 +60,8 @@ public class GameInstance {
         return null;
     }
 
-    public LinkedList<TileObject> getDeadWallTiles() {
+    public static LinkedList<TileObject> getDeadWallTiles() {
         //TODO: Same issue as for PlayerObject : when to create TileObjects ?
-        return null;
+        return TileMapper.getTiles(game.getDeadWall());
     }
 }
