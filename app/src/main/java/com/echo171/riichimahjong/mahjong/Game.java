@@ -104,12 +104,16 @@ public class Game {
         //ON EACH DEVICE
         //UiManager m = new UiManager(this);
         //m.initialize();
-        nextPlayerTurn();
+        //nextPlayerTurn();
         return true;
     }
 
     public Player getPlayer(Wind playerSide) {
         return players.get(playerSide.getValue());
+    }
+
+    public LinkedList<Player> getPlayers() {
+        return players;
     }
 
     public TileSet getDeadWall() {

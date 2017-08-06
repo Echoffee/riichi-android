@@ -1,7 +1,7 @@
-package com.echo171.riichimahjong.ui;
+package com.echo171.riichimahjong.game_ui;
 
-import com.echo171.riichimahjong.ui.enums.TileFamily;
-import com.echo171.riichimahjong.ui.enums.TileOrientation;
+import com.echo171.riichimahjong.game_ui.enums.TileFamily;
+import com.echo171.riichimahjong.game_ui.enums.TileOrientation;
 
 public class TileQuery {
 

@@ -1,7 +1,7 @@
-package com.echo171.riichimahjong.ui.gameobjects;
+package com.echo171.riichimahjong.game_ui.gameobjects;
 
 import android.graphics.*;
-import com.echo171.riichimahjong.ui.animations.GameObjectAnimator;
+import com.echo171.riichimahjong.game_ui.animations.GameObjectAnimator;
 
 public class GameObject {
     private boolean isInitialized = false;

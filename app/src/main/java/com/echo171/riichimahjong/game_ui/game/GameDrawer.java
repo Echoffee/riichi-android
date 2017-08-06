@@ -1,16 +1,16 @@
-package com.echo171.riichimahjong.ui.game;
+package com.echo171.riichimahjong.game_ui.game;
 
 import android.content.res.Resources;
 import android.graphics.*;
-import com.echo171.riichimahjong.ui.GameInstance;
-import com.echo171.riichimahjong.ui.TextureProvider;
-import com.echo171.riichimahjong.ui.animations.GameObjectAnimator;
-import com.echo171.riichimahjong.ui.controls.Button;
-import com.echo171.riichimahjong.ui.enums.PlayerPosition;
-import com.echo171.riichimahjong.ui.enums.TileOrientation;
-import com.echo171.riichimahjong.ui.enums.WindOrientation;
-import com.echo171.riichimahjong.ui.gameobjects.PlayerObject;
-import com.echo171.riichimahjong.ui.gameobjects.TileObject;
+import com.echo171.riichimahjong.game_ui.GameInstance;
+import com.echo171.riichimahjong.game_ui.TextureProvider;
+import com.echo171.riichimahjong.game_ui.animations.GameObjectAnimator;
+import com.echo171.riichimahjong.game_ui.controls.Button;
+import com.echo171.riichimahjong.game_ui.enums.PlayerPosition;
+import com.echo171.riichimahjong.game_ui.enums.TileOrientation;
+import com.echo171.riichimahjong.game_ui.enums.WindOrientation;
+import com.echo171.riichimahjong.game_ui.gameobjects.PlayerObject;
+import com.echo171.riichimahjong.game_ui.gameobjects.TileObject;
 
 import java.util.LinkedList;
 
@@ -18,7 +18,6 @@ import java.util.LinkedList;
  * Created by echo on 19/06/2017.
  */
 public class GameDrawer {
-    private GameInstance gameInstance;
     private Resources resources;
 
     public void setDirty(boolean dirty) {
@@ -75,12 +74,12 @@ public class GameDrawer {
     private Bitmap screen;
 
 
-    public GameDrawer(GameInstance game) {
-        this.gameInstance = game;
+    public GameDrawer(Resources resources) {
         //playerId = 4;
         paint = new Paint();
         paint.setAntiAlias(true);
         buttons = new LinkedList<>();
+        this.resources = resources;
     }
 
     public void setResources(Resources resources) {
@@ -150,9 +149,9 @@ public class GameDrawer {
         {
             Canvas c = new Canvas(screen);
             drawPlaymat(c);
-            for (PlayerObject player : gameInstance.getPlayers())
+            for (PlayerObject player : GameInstance.getPlayers())
             {
-                if (player.getWind() != gameInstance.getLocalPlayer().getWind())
+                if (player.getWind() != GameInstance.getLocalPlayer().getWind())
                     drawPlayerHandL(c, player);
 
                 drawPlayerRiver(c, player);
@@ -166,7 +165,7 @@ public class GameDrawer {
         }
 
         canvas.drawBitmap(screen, 0, 0, paint);
-        drawPlayerHandL(canvas, gameInstance.getLocalPlayer());
+        drawPlayerHandL(canvas, GameInstance.getLocalPlayer());
 //        for (Button b : UiController.getUi())
 //            b.draw(canvas);
     }
@@ -177,7 +176,7 @@ public class GameDrawer {
         if (x > playerSelfPlacementX && y > playerSelfPlacementY)
         {
             int i = (int) ((x - playerSelfPlacementX) / (tileWidthL * PLAYER_SELF_SIZE_MODIFIER));
-            if (i != gameInstance.getLocalPlayer().getPlayer().getSelectedTile() && i < MultiplayerManager.getLocalPlayer().getPlayer().getHand().getTiles().size())
+            if (i != GameInstance.getLocalPlayer().getPlayer().getSelectedTile() && i < MultiplayerManager.getLocalPlayer().getPlayer().getHand().getTiles().size())
             {
                 GameObjectAnimator a = new GameObjectAnimator(MultiplayerManager.getLocalPlayer().getPlayer().getHand().getTiles().get(i), (int) (playerSelfPlacementX + i * tileWidthL * PLAYER_SELF_SIZE_MODIFIER), (int) playerSelfPlacementY);
 
@@ -192,7 +191,7 @@ public class GameDrawer {
 
         boolean result = false;
         for (Button b : UiController.getUi())
-            if (b.handleTouch(event, gameInstance))
+            if (b.handleTouch(event, GameInstance))
                 result = true;
 
         return result;
@@ -209,7 +208,7 @@ public class GameDrawer {
             Bitmap text = Bitmap.createBitmap(800, 800, Bitmap.Config.ARGB_8888);
             Canvas writer = new Canvas(text);
             Matrix m = new Matrix();
-            //int i = gameInstance.getPositionDelta(s);
+            //int i = GameInstance.getPositionDelta(s);
             m.setRotate(-90 * s.getValue(), 400, 400);
             switch (s.getValue())
             {
@@ -218,13 +217,13 @@ public class GameDrawer {
                 case 2: m.postTranslate(playerFrontWindPlacementX - 400, playerFrontWindPlacementY - 400);break;
                 case 3: m.postTranslate(playerLeftWindPlacementX - 400, playerLeftWindPlacementY - 400);break;
             }
-            Bitmap w = BitmapFactory.decodeResource(resources, TextureProvider.getWindTextureId(gameInstance.getPlayer(s).getWind()));
+            Bitmap w = BitmapFactory.decodeResource(resources, TextureProvider.getWindTextureId(GameInstance.getPlayer(s).getWind()));
             writer.drawBitmap(w, new Rect(0, 0, w.getWidth(), w.getHeight()), new RectF(
                     400,
                     400,
                     400 + 0.01875f * canvas.getWidth()* 1.5f,
                     400 + 0.03333f * canvas.getHeight()* 2), paint);
-            writer.drawText("" + gameInstance.getPlayer(s).getScore(), 400 + canvas.getWidth() * 0.078125f, 400 + 16 + (0.01875f * canvas.getWidth()* 1.5f)/2, paint);
+            writer.drawText("" + GameInstance.getPlayer(s).getScore(), 400 + canvas.getWidth() * 0.078125f, 400 + 16 + (0.01875f * canvas.getWidth()* 1.5f)/2, paint);
             canvas.drawBitmap(text, m, paint);
         }
 
@@ -253,7 +252,7 @@ public class GameDrawer {
         float y = 0;
         WindOrientation playerSide = player.getWind();
         float m = (player.getWind() == playerSide ? PLAYER_SELF_SIZE_MODIFIER : PLAYER_OTHER_SIZE_MODIFIER);
-        //int delta = gameInstance.getPositionDelta(player.getPosition());
+        //int delta = GameInstance.getPositionDelta(player.getPosition());
         PlayerPosition position = player.getPosition();
         switch (position)
         {
@@ -291,24 +290,24 @@ public class GameDrawer {
                         break;
                 }
 
-                canvas.drawBitmap(tile, new Rect(0, 0, tile.getWidth(), tile.getHeight()), new RectF(rect.left, rect.top - (i == selectedTile && playerSide == gameInstance.getCurrentPlayerTurn() ? tileHeightL/2 : 0), rect.right, rect.bottom - (i == selectedTile && playerSide == gameInstance.getCurrentPlayerTurn() ? tileHeightL/2 : 0)), paint);
+                canvas.drawBitmap(tile, new Rect(0, 0, tile.getWidth(), tile.getHeight()), new RectF(rect.left, rect.top - (i == selectedTile && playerSide == GameInstance.getCurrentPlayerTurn() ? tileHeightL/2 : 0), rect.right, rect.bottom - (i == selectedTile && playerSide == GameInstance.getCurrentPlayerTurn() ? tileHeightL/2 : 0)), paint);
             }
 
             if (position == PlayerPosition.SELF || position == PlayerPosition.FRONT)
             {
-                rect.left += (tileWidthL * m * (i == tiles.size() - 2 && gameInstance.getCurrentPlayerTurn() == playerSide ? 1f: 1));
-                rect.right += (tileWidthL * m * (i == tiles.size() - 2 && gameInstance.getCurrentPlayerTurn() == playerSide ? 1f: 1));
+                rect.left += (tileWidthL * m * (i == tiles.size() - 2 && GameInstance.getCurrentPlayerTurn() == playerSide ? 1f: 1));
+                rect.right += (tileWidthL * m * (i == tiles.size() - 2 && GameInstance.getCurrentPlayerTurn() == playerSide ? 1f: 1));
             }else
             {
-                rect.top += (tileHeightL * 0.5f * m * (i == tiles.size() - 2 && gameInstance.getCurrentPlayerTurn() == playerSide ? 1f : 1));
-                rect.bottom += (tileHeightL * 0.5f * m * (i == tiles.size() - 2 && gameInstance.getCurrentPlayerTurn() == playerSide ? 1f : 1));
+                rect.top += (tileHeightL * 0.5f * m * (i == tiles.size() - 2 && GameInstance.getCurrentPlayerTurn() == playerSide ? 1f : 1));
+                rect.bottom += (tileHeightL * 0.5f * m * (i == tiles.size() - 2 && GameInstance.getCurrentPlayerTurn() == playerSide ? 1f : 1));
 
             }
         }
     }
 
     private void newTurnAnimation(Canvas canvas) {
-        PlayerObject p = gameInstance.getLocalPlayer();
+        PlayerObject p = GameInstance.getLocalPlayer();
         float posX = playerSelfPlacementX + (p.getHandTiles().size() - 1) * tileWidthL * PLAYER_SELF_SIZE_MODIFIER;
         float posY = playerSelfPlacementY;
 
@@ -340,7 +339,7 @@ public class GameDrawer {
         float m = PLAYER_OTHER_SIZE_MODIFIER;
         LinkedList<TileObject> tiles = player.getRiverTiles();
         tiles = arrangeRiver(tiles, player);
-        //int delta = gameInstance.getPositionDelta(playerSide);
+        //int delta = GameInstance.getPositionDelta(playerSide);
         PlayerPosition position = player.getPosition();
         for (int i = 0; i < tiles.size(); i++)
         {
@@ -390,7 +389,7 @@ public class GameDrawer {
         //Side localWind = MultiplayerManager.getLocalPlayer().getPlayer().getWind();
         //int delta = playerSide.getValue() - localWind.getValue();
         PlayerPosition position = player.getPosition();
-        float m = (player == gameInstance.getLocalPlayer() ? 1f : 0.8f);
+        float m = (player == GameInstance.getLocalPlayer() ? 1f : 0.8f);
         //LinkedList<TileSet> melds = player.getMelds();
         LinkedList<LinkedList<TileObject>> melds = player.getMelds();
         for (int s = 0; s < melds.size(); s++)
@@ -465,7 +464,7 @@ public class GameDrawer {
     }
 
     private void drawDeadWallL(Canvas canvas) {
-        LinkedList<TileObject> tiles = gameInstance.getDeadWallTiles();
+        LinkedList<TileObject> tiles = GameInstance.getDeadWallTiles();
         int index = 0;
         float step = (tileWidthL * PLAYER_OTHER_SIZE_MODIFIER);
         RectF rect = new RectF(deadWallPlacementX,

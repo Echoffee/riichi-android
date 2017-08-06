@@ -1,4 +1,4 @@
-package com.echo171.riichimahjong.ui.controls;
+package com.echo171.riichimahjong.game_ui.controls;
 
 /**
  * Created by echo on 20/06/2017.

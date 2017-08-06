@@ -1,10 +1,10 @@
-package com.echo171.riichimahjong.ui;
+package com.echo171.riichimahjong.game_ui;
 
 import com.echo171.riichimahjong.mahjong.Game;
-import com.echo171.riichimahjong.ui.enums.PlayerPosition;
-import com.echo171.riichimahjong.ui.enums.WindOrientation;
-import com.echo171.riichimahjong.ui.gameobjects.PlayerObject;
-import com.echo171.riichimahjong.ui.gameobjects.TileObject;
+import com.echo171.riichimahjong.game_ui.enums.PlayerPosition;
+import com.echo171.riichimahjong.game_ui.enums.WindOrientation;
+import com.echo171.riichimahjong.game_ui.gameobjects.PlayerObject;
+import com.echo171.riichimahjong.game_ui.gameobjects.TileObject;
 
 import java.util.LinkedList;
 
@@ -37,13 +37,13 @@ public class GameInstance {
         return localPlayer;
     }
 
-    public static int getPositionDelta(PlayerPosition s) {
+/*    public static int getPositionDelta(PlayerPosition s) {
         int localPosition = s.getValue() - localPlayer.getWind().getValue();
         if (localPosition < 0)
             localPosition = 4 - s.getValue();
 
         return localPosition;
-    }
+    }*/
 
     public static WindOrientation getCurrentPlayerTurn() {
         switch (game.getCurrentPlayerTurn()) {
@@ -61,7 +61,15 @@ public class GameInstance {
     }
 
     public static LinkedList<TileObject> getDeadWallTiles() {
-        //TODO: Same issue as for PlayerObject : when to create TileObjects ?
+        //Mapper usage
         return TileMapper.getTiles(game.getDeadWall());
+    }
+
+    public static void setLocalPlayer(PlayerObject localPlayer) {
+        GameInstance.localPlayer = localPlayer;
+    }
+
+    public static void setPlayerObjects(LinkedList<PlayerObject> playerObjects) {
+        GameInstance.playerObjects = playerObjects;
     }
 }

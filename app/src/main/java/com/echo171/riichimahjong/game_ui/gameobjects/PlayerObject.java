@@ -1,11 +1,10 @@
-package com.echo171.riichimahjong.ui.gameobjects;
+package com.echo171.riichimahjong.game_ui.gameobjects;
 
 import com.echo171.riichimahjong.mahjong.Player;
-import com.echo171.riichimahjong.mahjong.Tile;
-import com.echo171.riichimahjong.ui.GameInstance;
-import com.echo171.riichimahjong.ui.TileMapper;
-import com.echo171.riichimahjong.ui.enums.PlayerPosition;
-import com.echo171.riichimahjong.ui.enums.WindOrientation;
+import com.echo171.riichimahjong.game_ui.GameInstance;
+import com.echo171.riichimahjong.game_ui.TileMapper;
+import com.echo171.riichimahjong.game_ui.enums.PlayerPosition;
+import com.echo171.riichimahjong.game_ui.enums.WindOrientation;
 
 import java.util.LinkedList;
 
@@ -14,6 +13,10 @@ public class PlayerObject {
 
     //ui-only properties
     private int selectedTileIndex = -1;
+
+    public PlayerObject(Player player){
+        this.player = player;
+    }
 
     public WindOrientation getWind(){
         switch (player.getWind()) {
@@ -31,7 +34,7 @@ public class PlayerObject {
     public PlayerPosition getPosition(){
         int delta = GameInstance.getLocalPlayer().getWind().getValue() - getWind().getValue();
         if (delta < 0)
-            delta = 4 - delta;
+            delta = 4 - getWind().getValue();
 
         return PlayerPosition.values()[delta];
     }

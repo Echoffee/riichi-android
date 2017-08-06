@@ -1,11 +1,11 @@
-package com.echo171.riichimahjong.ui.gameobjects;
+package com.echo171.riichimahjong.game_ui.gameobjects;
 
 import android.graphics.Bitmap;
 import com.echo171.riichimahjong.mahjong.Tile;
-import com.echo171.riichimahjong.ui.GameInstance;
-import com.echo171.riichimahjong.ui.TextureProvider;
-import com.echo171.riichimahjong.ui.enums.*;
-import com.echo171.riichimahjong.ui.TileQuery;
+import com.echo171.riichimahjong.game_ui.GameInstance;
+import com.echo171.riichimahjong.game_ui.TextureProvider;
+import com.echo171.riichimahjong.game_ui.enums.*;
+import com.echo171.riichimahjong.game_ui.TileQuery;
 
 public class TileObject extends GameObject {
     private Tile tile;

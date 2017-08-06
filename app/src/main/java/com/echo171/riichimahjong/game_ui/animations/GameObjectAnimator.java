@@ -1,7 +1,7 @@
-package com.echo171.riichimahjong.ui.animations;
+package com.echo171.riichimahjong.game_ui.animations;
 
 import android.graphics.RectF;
-import com.echo171.riichimahjong.ui.gameobjects.GameObject;
+import com.echo171.riichimahjong.game_ui.gameobjects.GameObject;
 
 public class GameObjectAnimator {
     private GameObject object;

@@ -1,11 +1,11 @@
-package com.echo171.riichimahjong.ui.controls;
+package com.echo171.riichimahjong.game_ui.controls;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.view.MotionEvent;
-import com.echo171.riichimahjong.ui.GameInstance;
+import com.echo171.riichimahjong.game_ui.GameInstance;
 
 /**
  * Created by echo on 20/06/2017.

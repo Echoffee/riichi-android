@@ -1,11 +1,11 @@
-package com.echo171.riichimahjong.ui;
+package com.echo171.riichimahjong.game_ui;
 
 import android.content.res.Resources;
 import android.graphics.*;
 import com.echo171.riichimahjong.R;
-import com.echo171.riichimahjong.ui.enums.TileFamily;
-import com.echo171.riichimahjong.ui.enums.TileOrientation;
-import com.echo171.riichimahjong.ui.enums.WindOrientation;
+import com.echo171.riichimahjong.game_ui.enums.TileFamily;
+import com.echo171.riichimahjong.game_ui.enums.TileOrientation;
+import com.echo171.riichimahjong.game_ui.enums.WindOrientation;
 
 import java.util.HashMap;
 

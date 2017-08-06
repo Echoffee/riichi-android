@@ -1,9 +1,9 @@
-package com.echo171.riichimahjong.ui;
+package com.echo171.riichimahjong.game_ui;
 
 import com.echo171.riichimahjong.mahjong.Tile;
 import com.echo171.riichimahjong.mahjong.TileSet;
-import com.echo171.riichimahjong.ui.enums.TilePosition;
-import com.echo171.riichimahjong.ui.gameobjects.TileObject;
+import com.echo171.riichimahjong.game_ui.enums.TilePosition;
+import com.echo171.riichimahjong.game_ui.gameobjects.TileObject;
 
 import java.util.HashMap;
 import java.util.LinkedList;
